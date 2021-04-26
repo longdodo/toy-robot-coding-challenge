@@ -2,9 +2,9 @@ RSpec.describe ToyRobot::Directions do
   subject(:directions) { described_class }
 
   describe "[]" do
-    it "creates a North direction when a :north symbol is passed" do
-      north = directions[:north]
+    let(:north) { directions[:north] }
 
+    it "creates a North direction when a :north symbol is passed" do
       expect(north).to be_a ToyRobot::Directions::North
     end
 
@@ -32,10 +32,10 @@ RSpec.describe ToyRobot::Directions do
     end
 
     describe "#forward" do
-      it "knows to move one step forward given a Coordinate" do
-        coord_0x0 = ToyRobot::Coordinate.new 0, 0
-        new_coord = north.forward(coord_0x0)
+      let(:coord) { ToyRobot::Coordinate.new 0, 0 }
+      let(:new_coord) { north.forward(coord) }
 
+      it "knows to move one step forward given a Coordinate" do
         expect(new_coord.x).to eq(0)
         expect(new_coord.y).to eq(1)
       end
@@ -58,9 +58,9 @@ RSpec.describe ToyRobot::Directions do
     end
 
     describe "forward" do
-      it "knows to move one step forward given a Coordinate" do
-        new_coord = west.forward ToyRobot::Coordinate.new 1, 0
+      let(:new_coord) { west.forward ToyRobot::Coordinate.new 1, 0 }
 
+      it "knows to move one step forward given a Coordinate" do
         expect(new_coord.x).to eq(0)
         expect(new_coord.y).to eq(0)
       end
@@ -83,9 +83,9 @@ RSpec.describe ToyRobot::Directions do
     end
 
     describe "#forward" do
-      it "knows to move one step forward given a Coordinate" do
-        new_coord = south.forward ToyRobot::Coordinate.new 0, 1
+      let(:new_coord) { south.forward ToyRobot::Coordinate.new 0, 1 }
 
+      it "knows to move one step forward given a Coordinate" do
         expect(new_coord.x).to eq(0)
         expect(new_coord.y).to eq(0)
       end
@@ -108,9 +108,9 @@ RSpec.describe ToyRobot::Directions do
     end
 
     describe "#forward" do
-      it "knows to move one step forward given a Coordinate" do
-        new_coord = east.forward ToyRobot::Coordinate.new 0, 0
+      let(:new_coord) { east.forward ToyRobot::Coordinate.new 0, 0 }
 
+      it "knows to move one step forward given a Coordinate" do
         expect(new_coord.x).to eq(1)
         expect(new_coord.y).to eq(0)
       end
