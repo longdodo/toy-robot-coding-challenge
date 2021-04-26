@@ -1,83 +1,48 @@
-# Toy Robot Coding Puzzle
+# ToyRobot Coding Challenge
+_Long Do - <longht.do@gmail.com>_
 
-- The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
-- There are no other obstructions on the table surface.
-- The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement
-  that would result in the robot falling from the table must be prevented, however further valid movement commands must still
-  be allowed.
+## About
 
-- Create an application that can read in commands of the following form:
+This application is a simulation of a toy robot moving on a square table top, of default dimensions of 5 units x 5 units using Ruby -v 3.0.0
 
-```
-PLACE X,Y,F
-MOVE
-LEFT
-RIGHT
-REPORT
-```
+## Setup
 
-- PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
-- The origin (0,0) can be considered to be the SOUTH WEST most corner.
-- The first valid command to the robot is a PLACE command, after that, any sequence of commands may be issued, in any order, including another PLACE command. The application should discard all commands in the sequence until a valid PLACE command has been executed.
-- MOVE will move the toy robot one unit forward in the direction it is currently facing.
-- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
-- REPORT will announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient.
+1. Clone this Repo
+> $ git clone https://gitlab.com/longht.do/toy_robot.git
+2. Go to the root of the app
+`cd toy_robot`
+3. Install the required gem
+`bundle install`
 
-- A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT and REPORT commands.
-  . Input can be from a file, or from standard input, as the developer chooses.
-  . Provide test data to exercise the application.
+## Usage
 
-> Constraints:
-> The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
-> Any move that would cause the robot to fall must be ignored.
+Command
 
-Example Input and Output:
+`.run.rb [FILE_PATH]`
 
-a)
+Examples
 
-```
-PLACE 0,0,NORTH
-MOVE
-REPORT
-Output: 0,1,NORTH
-```
+`./run.rb data/data-1.txt`
 
-b)
+`./run.rb data/data-2.txt`
 
-```
-PLACE 0,0,NORTH
-LEFT
-REPORT
-Output: 0,0,WEST
-```
+`./run.rb data/data-3.txt`
 
-c)
+`./run.rb data/data-4.txt`
 
-```
-PLACE 1,2,EAST
-MOVE
-MOVE
-LEFT
-MOVE
-REPORT
-Output: 3,3,NORTH
-```
+Commands | Description
+--- | ---
+PLACE X,Y,F | Place the robot on the table at coordinates x,y and facing the direction f. Valid x and y values are between 0-4. Valid directions are WEST, NORTH, EAST, SOUTH. Example Input: "PLACE 0,0,NORTH"
+MOVE | Move the robot forward 1 step in the direction it is facing.
+LEFT | Turn the robot's direction 90 degress to the left. I.e. if the robot is facing NORTH, 1 left turn will turn the robot's direction to WEST.
+RIGHT | Turn the robot's direction 90 degress to the right. I.e. if the robot is facing NORTH, 1 left turn will turn the robot's direction to EAST.
+REPORT | Output the current position of the robot. Example Output: "Output: 0,0,NORTH"
 
-## Guideline
+***
 
-- Think about your solution as a code that will be submitted to production. Add tests to make sure it's bulletproof.
-- Add a README file (or call it a different name) where you can explain your design decisions and any other information you would like to add.  	 
 
-## Submitting your solution
+## Testing
 
-- If you have a GitHub account, fork this repo and when your solution is ready for submission, send to us over email your ready to view forked repo URL
-- Otherwise, please use `git bundle` to package up a copy of your repository (with complete commit history) as a single file and send it to us 
-  
-  i.e
-  ```
-  git bundle create toy-robot-coding-challenge.bundle master
-  ```
-  
-----------------
+Test by runing rspec
 
-  Good luck and looking forward to you submission!
+`bundle exec rspec`
